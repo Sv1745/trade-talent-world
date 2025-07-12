@@ -1,4 +1,3 @@
-
 import { useUser } from '@clerk/clerk-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -33,8 +32,7 @@ export const Admin = () => {
     const updatedUser = { ...targetUser, isBanned };
     updateUser(userId, updatedUser);
     
-    const action: AdminAction = {
-      id: Date.now().toString(),
+    const action: Omit<AdminAction, 'id' | 'createdAt'> = {
       adminId: user!.id,
       type: isBanned ? 'user_banned' : 'user_unbanned',
       targetId: userId,
@@ -44,7 +42,7 @@ export const Admin = () => {
     
     addAdminAction(action);
     setUsers(prev => prev.map(u => u.id === userId ? updatedUser : u));
-    setAdminActions(prev => [action, ...prev]);
+    setAdminActions(prev => [{ ...action, id: Date.now().toString(), createdAt: new Date().toISOString() }, ...prev]);
     
     toast.success(`User ${isBanned ? 'banned' : 'unbanned'} successfully`);
   };

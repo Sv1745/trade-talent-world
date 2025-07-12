@@ -1,4 +1,3 @@
-
 import { User, SwapRequest, Feedback, AdminAction } from '../types';
 
 // Storage keys
@@ -19,6 +18,7 @@ const sampleUsers: User[] = [
     availability: 'Weekends and evenings',
     isPublic: true,
     isActive: true,
+    isBanned: false,
     createdAt: new Date().toISOString(),
     clerkId: 'sample_1'
   },
@@ -32,6 +32,7 @@ const sampleUsers: User[] = [
     availability: 'Flexible schedule',
     isPublic: true,
     isActive: true,
+    isBanned: false,
     createdAt: new Date().toISOString(),
     clerkId: 'sample_2'
   },
@@ -45,6 +46,7 @@ const sampleUsers: User[] = [
     availability: 'Mornings preferred',
     isPublic: true,
     isActive: true,
+    isBanned: false,
     createdAt: new Date().toISOString(),
     clerkId: 'sample_3'
   }
@@ -172,3 +174,6 @@ export const createAdminAction = (action: Omit<AdminAction, 'id' | 'createdAt'>)
   localStorage.setItem(ADMIN_ACTIONS_KEY, JSON.stringify(actions));
   return newAction;
 };
+
+// Add the missing addAdminAction export (alias for createAdminAction)
+export const addAdminAction = createAdminAction;

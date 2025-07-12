@@ -10,6 +10,7 @@ export interface User {
   availability: string;
   isPublic: boolean;
   isActive: boolean;
+  isBanned?: boolean;
   createdAt: string;
   clerkId: string;
 }
@@ -40,9 +41,10 @@ export interface Feedback {
 
 export interface AdminAction {
   id: string;
-  type: 'ban' | 'unban' | 'delete_skill' | 'delete_swap';
+  type: 'user_banned' | 'user_unbanned' | 'delete_skill' | 'delete_swap';
   targetId: string;
   adminId: string;
   reason: string;
+  timestamp: string;
   createdAt: string;
 }
